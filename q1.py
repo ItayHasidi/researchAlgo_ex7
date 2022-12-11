@@ -82,14 +82,16 @@ def solve_linear_equation(iterations):
         cvxpy_times.append(stop_cvxpy - start_cvxpy)
     numpy_avg = average_calc(numpy_times)
     cvxpy_avg = average_calc(cvxpy_times)
-    print("numpy was better by: " + str(cvxpy_avg / numpy_avg) if numpy_avg <= cvxpy_avg else
-          "cvxpy was better by: " + str(numpy_avg / cvxpy_avg))
     plt.plot(range(1, iterations), numpy_times, label="numpy")
     plt.plot(range(1, iterations), cvxpy_times, label="cvxpy")
     plt.ylabel("time")
     plt.xlabel("number of x's")
     plt.legend()
+    msg = "numpy was better by: " + str(cvxpy_avg / numpy_avg) if numpy_avg <= cvxpy_avg else \
+          "cvxpy was better by: " + str(numpy_avg / cvxpy_avg)
+    plt.figtext(0.5, 0.9, msg, ha="center", fontsize=14,
+                bbox={"facecolor": "white", "alpha": 0.6, "pad": 5})
     plt.show()
 
 
-# solve_linear_equation(1000)
+solve_linear_equation(1000)
